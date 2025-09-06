@@ -10,6 +10,7 @@ This project is a real-time hand gesture recognition system using PyTorch and Op
 - Voice feedback for gestures (except neutral "ok")
 
 ## 🤖 Gesture-to-Action Mapping
+```
 | Gesture   | Action           |
 |-----------|------------------|
 | `rock`    | Play             |
@@ -18,6 +19,7 @@ This project is a real-time hand gesture recognition system using PyTorch and Op
 | `dislike` | Volume Down      |
 | `ok`      | Wait (no action) |
 | `fist`    | Stop             |
+```
 
 ## 🧱 Project Structure
 ```
