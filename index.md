@@ -1,47 +1,66 @@
-# 📸 Webcam Hand Gesture Predictor
+# ✋ Hand Gesture Volume Control (MacOS)
 
-This script (`webcam_predict.py`) runs a **real-time hand gesture classifier** using your webcam and a pre-trained CNN model built with PyTorch.
+This project is a real-time hand gesture recognition system using PyTorch and OpenCV that lets you control music playback and system volume on macOS using your webcam.
 
-## 🎯 Purpose
-- Live detection of hand gestures
-- Visual overlay of gesture label on camera feed
-- Works locally using your laptop’s webcam
+## 🎯 Features
+- Real-time webcam gesture detection
+- Pre-trained CNN model (`HandGestureCNN`)
+- macOS volume and Music app control using `osascript`
+- Cooldown logic to prevent repeated actions
+- Voice feedback for gestures (except neutral "ok")
 
-## 🤖 Recognized Gestures
-| Class Index | Gesture   |
-|-------------|-----------|
-| 0           | dislike   |
-| 1           | fist      |
-| 2           | like      |
-| 3           | ok        |
-| 4           | palm      |
-| 5           | rock      |
+## 🤖 Gesture-to-Action Mapping
+| Gesture   | Action           |
+|-----------|------------------|
+| `rock`    | Play             |
+| `palm`    | Pause            |
+| `like`    | Volume Up        |
+| `dislike` | Volume Down      |
+| `ok`      | Wait (no action) |
+| `fist`    | Stop             |
+
+## 🧱 Project Structure
+```
+hand_gesture_cnn/
+├── checkpoints/              # Saved model weights
+│   └── best_model.pth
+├── models/
+│   └── model.py              # HandGestureCNN architecture
+├── live_demo/
+│   ├── webcam_predict.py     # Basic live webcam classification
+│   └── webcam_volume_control.py # Music and volume control logic
+```
+
+## 🛠 Want more? 
+Check out [`webcam_volume_control.py`](./hand_gesture_cnn/live_demo/webcam_predict.py) to control your system with gestures!
 
 ## 🛠 Requirements
+- Python 3.8+
+- macOS (tested on M1 Pro)
+- Webcam
+
+### 📦 Install Dependencies
 ```bash
-pip install torch torchvision opencv-python
+pip install torch torchvision opencv-python osascript
 ```
 
-## 🚀 How to Run
-From the root of your project:
+## 🚀 Run the Volume Control Script
+From the project root:
 ```bash
-python live_demo/webcam_predict.py
+python live_demo/webcam_volume_control.py
 ```
 
-### 📦 Make Sure You Have:
-- `checkpoints/best_model.pth` saved
-- `models/model.py` containing `HandGestureCNN`
+> 🧠 Tip: Make sure your virtual environment is activated and `Music.app` is open.
 
-## 📂 How It Works
-1. Loads a pre-trained model from disk
-2. Captures live frames using OpenCV
-3. Applies PyTorch transforms
-4. Predicts the gesture and overlays it on the video feed
+## ✅ To Do / Ideas
+- Add hand detection (MediaPipe) to improve accuracy
+- Enable control toggling (on/off switch)
+- Add GUI display or gesture confidence levels
 
-## 🔁 Useful For
-- Model sanity checks
-- Debugging gesture classification before integrating actions
+## 🙌 Credits
+- Built using PyTorch, OpenCV, and osascript
+- Model trained on the HaGRID hand gesture dataset
 
 ---
-
-🛠 Want more? Check out [`webcam_volume_control.py`](./hand_gesture_cnn/live_demo/webcam_predict.py) to control your system with gestures!
+🖐 Built with creativity and a MacBook by Marcos Hernandez
+---
