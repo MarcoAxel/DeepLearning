@@ -1,0 +1,14 @@
+v1- I messed up and saved the weigths but not the optimizer 
+v2- I saved both optimizer and weights and ran 40 times best results 
+v3- I used v2 and I updated the following training behavior, resulted in a triggered early stop due to no improvement, caused by label smoothing added late in training when model was already well optimized :
+    * Added Label Smoothing to CrossEntropyLos:
+        criterion = nn.CrossEntropyLoss(label_smoothing=0.1)  # 0.1 is a good starting point
+
+    * Added training rate scheduler:
+        from torch.optim.lr_scheduler import ReduceLROnPlateau
+        scheduler = ReduceLROnPlateau(optimizer, mode='min', patience=2, factor=0.5, verbose=True)
+    * Added Scheduler Logic to Training Loop:
+        scheduler.step(epoch_val_loss)
+
+v4- I used v2 again but tookout late label smoothing, though I kept the training rate scheduler: Stopped after 5 iterations, no significant progress.
+
